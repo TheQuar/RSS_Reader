@@ -1,0 +1,3 @@
+
+rootProject.name = "taskd2"
+include ':app'
