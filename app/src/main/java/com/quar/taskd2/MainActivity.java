@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
+    //check
     private void check_network() {
         swipeRefreshLayout.setRefreshing(true);
         if (Utils.check_network(MainActivity.this)) {
