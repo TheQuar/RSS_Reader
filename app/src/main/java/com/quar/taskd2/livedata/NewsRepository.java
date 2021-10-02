@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
+import com.quar.taskd2.models.NewsModel;
 import com.quar.taskd2.room.AppDatabase;
 import com.quar.taskd2.room.BreakNewsTable;
 import com.quar.taskd2.room.NewsDao;
@@ -30,7 +31,7 @@ public class NewsRepository extends AndroidViewModel {
 
     }
 
-    public LiveData<PagedList<BreakNewsTable>> getBreakNews() {
+    public LiveData<PagedList<NewsModel>> getBreakNews() {
         return new LivePagedListBuilder(appDatabase.myQuery().getBreakNews(), PAGE_SIZE).build();
     }
 
@@ -40,7 +41,7 @@ public class NewsRepository extends AndroidViewModel {
     }
 
 
-    public LiveData<PagedList<TopNewsTable>> getTopNews() {
+    public LiveData<PagedList<NewsModel>> getTopNews() {
         return new LivePagedListBuilder(appDatabase.myQuery().getTopNews(), PAGE_SIZE).build();
     }
 

@@ -12,6 +12,7 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.quar.taskd2.R;
+import com.quar.taskd2.models.NewsModel;
 import com.quar.taskd2.room.BreakNewsTable;
 import com.squareup.picasso.Picasso;
 
@@ -20,14 +21,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class AdapterBreakingNews extends PagedListAdapter<BreakNewsTable, AdapterBreakingNews.viewHolder> {
+public class AdapterBreakingNews extends PagedListAdapter<NewsModel, AdapterBreakingNews.viewHolder> {
 
     private final Context context;
     private ItemClickListener mClickListener;
 
 
     public AdapterBreakingNews(Context context) {
-        super(BreakNewsTable.DIFF_CALLBACK);
+        super(NewsModel.DIFF_CALLBACK);
         this.context = context;
     }
 
@@ -41,10 +42,10 @@ public class AdapterBreakingNews extends PagedListAdapter<BreakNewsTable, Adapte
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, final int position) {
-        final BreakNewsTable breakNewsTable = getItem(position);
+        final NewsModel newsModel = getItem(position);
 
-        if (breakNewsTable != null) {
-            holder.bindTo(breakNewsTable);
+        if (newsModel != null) {
+            holder.bindTo(newsModel);
         } else {
             holder.clear();
         }
@@ -52,7 +53,7 @@ public class AdapterBreakingNews extends PagedListAdapter<BreakNewsTable, Adapte
     }
 
     public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        BreakNewsTable breakNewsTable;
+        NewsModel newsModel;
 
         ImageView break_news_image;
 
@@ -69,20 +70,20 @@ public class AdapterBreakingNews extends PagedListAdapter<BreakNewsTable, Adapte
             break_news_date = itemView.findViewById(R.id.break_news_date);
         }
 
-        void bindTo(BreakNewsTable breakNewsTable) {
-            this.breakNewsTable = breakNewsTable;
+        void bindTo(NewsModel newsModel) {
+            this.newsModel = newsModel;
 
-            this.break_news_title.setText(breakNewsTable.getSource());
-            this.break_news_description.setText(breakNewsTable.getTitle());
+            this.break_news_title.setText(newsModel.getSource());
+            this.break_news_description.setText(newsModel.getTitle());
             try {
-                Date date1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(breakNewsTable.getPublishedAt());
+                Date date1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(newsModel.getPublishedAt());
                 break_news_date.setText(new SimpleDateFormat("MMMM dd, yyyy").format(date1));
 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            Picasso.get().load(breakNewsTable.getUrlToImage()).fit().centerCrop()
+            Picasso.get().load(newsModel.getUrlToImage()).fit().centerCrop()
                     .placeholder(R.drawable.ic_download)
                     .error(R.drawable.ic_broken_image)
                     .into(this.break_news_image);
@@ -96,7 +97,7 @@ public class AdapterBreakingNews extends PagedListAdapter<BreakNewsTable, Adapte
 
         @Override
         public void onClick(View v) {
-            if (mClickListener != null) mClickListener.onItemClick(v, breakNewsTable);
+            if (mClickListener != null) mClickListener.onItemClick(v, newsModel);
         }
     }
 
@@ -105,7 +106,7 @@ public class AdapterBreakingNews extends PagedListAdapter<BreakNewsTable, Adapte
     }
 
     public interface ItemClickListener {
-        void onItemClick(View view, BreakNewsTable breakNewsTable);
+        void onItemClick(View view, NewsModel newsModel);
     }
 
 

@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.quar.taskd2.models.NewsModel;
+
 import java.util.List;
 
 
@@ -16,7 +18,7 @@ public interface NewsDao {
     void insertBreakNews(List<BreakNewsTable> breakNewsTable);
 
     @Query("SELECT * FROM BreakNewsTable")
-    DataSource.Factory<Integer, BreakNewsTable> getBreakNews();
+    DataSource.Factory<Integer, NewsModel> getBreakNews();
 
     @Query(" Delete FROM BreakNewsTable ")
     void deleteBreakNewsTable();
@@ -25,7 +27,7 @@ public interface NewsDao {
     void insertTopNews(List<TopNewsTable> topNewsTables);
 
     @Query("SELECT * FROM TopNewsTable")
-    DataSource.Factory<Integer, TopNewsTable> getTopNews();
+    DataSource.Factory<Integer, NewsModel> getTopNews();
 
     @Query(" Delete FROM TopNewsTable")
     void deleteTopNewsTable();

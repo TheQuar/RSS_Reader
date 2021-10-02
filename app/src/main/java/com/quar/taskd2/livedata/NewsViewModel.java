@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
+import com.quar.taskd2.models.NewsModel;
 import com.quar.taskd2.room.BreakNewsTable;
 import com.quar.taskd2.room.TopNewsTable;
 
@@ -21,7 +22,7 @@ public class NewsViewModel extends AndroidViewModel {
         newsRepository = new NewsRepository(application);
     }
 
-    public LiveData<PagedList<BreakNewsTable>> getBreakNews() {
+    public LiveData<PagedList<NewsModel>> getBreakNews() {
         return newsRepository.getBreakNews();
     }
 
@@ -29,7 +30,7 @@ public class NewsViewModel extends AndroidViewModel {
         newsRepository.insertBreakNews(breakNewsTable);
     }
 
-    public LiveData<PagedList<TopNewsTable>> getTopNews() {
+    public LiveData<PagedList<NewsModel>> getTopNews() {
         return newsRepository.getTopNews();
     }
 
